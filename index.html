@@ -1,0 +1,59 @@
+<html>
+    <input id="principle" placeholder="Principle"></input>
+    <br>
+    <br>
+    <input id="rate" placeholder="Rate"></input> 
+    <br>
+    <br>
+    <input id="time" placeholder="Time"></input>
+    <br>
+    <br>
+    <button onclick="find()" id="btn">
+        Calculate
+    </button>
+    <div id="total"></div>
+    <div id="interest"></div>
+</html>
+<script>
+    async function find(){
+        // using mathematical logic
+        // const principle = document.getElementById("principle").value;
+        // const rate = document.getElementById("rate").value;
+        // const time = document.getElementById("time").value;
+
+        // const interest = (principle*rate*time)/100;
+
+        // console.log(interest);
+        // const total = parseInt(interest) + parseInt((principle));
+
+        // document.getElementById("total").innerHTML = interest;
+        // document.getElementById("interest").innerHTML = total;
+        
+        
+        // using api backend logic
+        apiCall();
+    }
+
+    async function apiCall(){
+        const principle = document.getElementById("principle").value;
+        const rate = document.getElementById("rate").value;
+        const time = document.getElementById("time").value;
+        console.log(principle);
+        console.log(rate);
+        console.log(time);
+        
+        const data = await fetch(`https://sum-server.100xdevs.com/interest?principal=${principle}&rate=${rate}&time=${time}`);
+        const fData = await data.json();
+        
+        const total = fData.total;
+        const interest = fData.interest;
+        console.log(total);
+        console.log(interest);
+        document.getElementById("total").innerHTML = "Total Amount:" + fData.total;
+        document.getElementById("interest").innerHTML = "Interest :" + fData.interest;
+    }
+
+
+
+
+</script>
